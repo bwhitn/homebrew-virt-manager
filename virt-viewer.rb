@@ -7,6 +7,7 @@ class VirtViewer < Formula
   depends_on "intltool" => :build
   depends_on "libtool" => :build
   depends_on "pkg-config" => :build
+  depends_on "meson" => :build
 
   depends_on "atk"
   depends_on "cairo"
@@ -32,7 +33,8 @@ class VirtViewer < Formula
       --prefix=#{prefix}
     ]
     system "./configure", *args
-    system "make", "install"
+    system "meson", "compile"
+    system "meson", "install"
   end
 
   def post_install

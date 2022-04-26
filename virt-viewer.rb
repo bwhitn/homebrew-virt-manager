@@ -26,15 +26,6 @@ class VirtViewer < Formula
 
   def install
     mkdir "build" do
-      =begin
-      args = %W[
-        --disable-silent-rules
-        --disable-update-mimedb
-        --with-gtk-vnc
-        --with-spice-gtk
-        --prefix=#{prefix}
-      ]
-        =end
       system "meson", *std_meson_args, ".."
       system "meson", "compile"
       system "meson", "install"

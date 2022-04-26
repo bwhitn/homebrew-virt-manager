@@ -25,16 +25,18 @@ class VirtViewer < Formula
   depends_on "spice-protocol"
 
   def install
-    args = %W[
-      --disable-silent-rules
-      --disable-update-mimedb
-      --with-gtk-vnc
-      --with-spice-gtk
-      --prefix=#{prefix}
-    ]
-    system "./configure", *args
-    system "meson", "compile"
-    system "meson", "install"
+    mkdir "build" do
+      args = %W[
+        --disable-silent-rules
+        --disable-update-mimedb
+        --with-gtk-vnc
+        --with-spice-gtk
+        --prefix=#{prefix}
+      ]
+      system "meson", *std_meson_args, *args, ".."
+      system "meson", "compile"
+      system "meson", "install"
+    end
   end
 
   def post_install

@@ -7,6 +7,7 @@ class VirtViewer < Formula
   depends_on "intltool" => :build
   depends_on "libtool" => :build
   depends_on "pkg-config" => :build
+  depends_on "ninja" => :build
   depends_on "meson" => :build
 
   depends_on "atk"
@@ -26,7 +27,7 @@ class VirtViewer < Formula
 
   def install
     mkdir "build" do
-      system "meson", *std_meson_args, ".."
+      system "meson", *std_meson_args, ".", ".."
       system "meson", "compile"
       system "meson", "install"
     end
